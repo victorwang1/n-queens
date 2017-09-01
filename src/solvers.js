@@ -27,9 +27,7 @@ window.findSolution = function(board, row, n, condition, cb) {
 // return a matrix (an array of arrays) representing a single nxn chessboard, with n rooks placed such that none of them can attack each other
 window.findNRooksSolution = function(n) {
   var solution = [];
-  solution = findSolution(undefined, 0, n, 'hasAnyRooksConflicts', function(board) {
-    return board.rows();
-  });
+  solution = findSolution(undefined, 0, n, 'hasAnyRooksConflicts', board => board.rows());
 
   console.log('Single solution for ' + n + ' rooks:', JSON.stringify(solution));
   return solution;
@@ -38,9 +36,7 @@ window.findNRooksSolution = function(n) {
 // return the number of nxn chessboards that exist, with n rooks placed such that none of them can attack each other
 window.countNRooksSolutions = function(n) {
   var solutionCount = 0;
-  findSolution(undefined, 0, n, 'hasAnyRooksConflicts', function() {
-    solutionCount++;
-  });
+  findSolution(undefined, 0, n, 'hasAnyRooksConflicts', () => {solutionCount++});
 
   console.log('Number of solutions for ' + n + ' rooks:', solutionCount);
   return solutionCount;
@@ -49,9 +45,7 @@ window.countNRooksSolutions = function(n) {
 // return a matrix (an array of arrays) representing a single nxn chessboard, with n queens placed such that none of them can attack each other
 window.findNQueensSolution = function(n) {
   var solution = new Board({n:n});
-  solution = findSolution(undefined, 0, n, 'hasAnyQueensConflicts', function(board) {
-    return board.rows();
-  }) || solution.rows();
+  solution = findSolution(undefined, 0, n, 'hasAnyQueensConflicts', board => board.rows()) || solution.rows();
 
   console.log('Single solution for ' + n + ' queens:', JSON.stringify(solution));
   return solution;
@@ -60,9 +54,7 @@ window.findNQueensSolution = function(n) {
 // return the number of nxn chessboards that exist, with n queens placed such that none of them can attack each other
 window.countNQueensSolutions = function(n) {
   var solutionCount = 0;
-  findSolution(undefined, 0, n, 'hasAnyQueensConflicts', function() {
-    solutionCount++;
-  });
+  findSolution(undefined, 0, n, 'hasAnyQueensConflicts', () => {solutionCount++});
 
   console.log('Number of solutions for ' + n + ' queens:', solutionCount);
   return solutionCount;
